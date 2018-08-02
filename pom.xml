@@ -8,20 +8,34 @@
 	<name>it-web Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<properties>
-		<!-- <version>4.2.9.RELEASE 4.1.2.RELEASE 4.3.5.RELEASE -->
-		<spring.version>4.2.3.RELEASE</spring.version>
+		<!-- <version>4.2.9.RELEASE   4.1.2.RELEASE   4.3.5.RELEASE-->
+		<spring.version>4.1.2.RELEASE</spring.version>
 		<mybatis.version>3.4.1</mybatis.version>
 		<!-- log4j日志文件管理包版本 -->
 		<slf4j.version>1.7.7</slf4j.version>
 		<log4j.version>1.6.1</log4j.version>
-		<mybatis-plus.version>2.1.9</mybatis-plus.version>
-		<druid.version>1.0.19</druid.version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>com.utils_max</groupId>
 			<artifactId>utils-max</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>${mybatis.version}</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>1.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper</artifactId>
+			<version>4.0.0</version>
 		</dependency>
 		<!-- springframework 核心 -->
 		<dependency>
@@ -73,6 +87,22 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.5</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>3.2.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.thetransactioncompany/cors-filter -->
 		<dependency>

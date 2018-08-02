@@ -1,6 +1,6 @@
 package com.itservice.service;
 
-import com.itservice.entity.UUsers;
+import com.itservice.entity.UUser;
 import com.itservice.result.ResultMsg;
 
 public interface IUserService {
@@ -13,6 +13,6 @@ public interface IUserService {
 	 * @param user
 	 * @return
 	 */
-	public ResultMsg register(UUsers user);
+	public ResultMsg register(UUser user);
 	
 }
