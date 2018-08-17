@@ -18,13 +18,31 @@ import com.utils_max.redis.RedisUtil;
 
 @Service("userMgtService")
 public class UserServiceImpl implements IUserService{
+	//用户信息处理 dao
 	@Autowired
 	private UUserMapper usermapper;
 	
 	public ResultMsg  register(UserRegisterParam user){
 		ResultMsg result=new ResultMsg();
-		//TODO 注册的业务逻辑
-		
+		if(!ParseUtils.isEmpty(user)){
+			UUser userInfo=usermapper.getUserByUsername(user.getUserName());
+			if(!ParseUtils.isEmpty(userInfo)){
+				result.setStatus(ResultStatusEnums.sysError);
+				result.setMsg("用户已经存在");
+				return result;
+			}
+			 userInfo=new UUser();
+			 userInfo.setUsername(user.getUserName());
+			 userInfo.setPwd(MD5Encrypt.encrypt(user.getPwd()));
+			 userInfo.setPhone(user.getMobilephone());
+			 if(usermapper.insert(userInfo)>0){
+				 result.setStatus(ResultStatusEnums.success);
+				 result.setMsg("注册成功");
+			 }else{
+				 result.setStatus(ResultStatusEnums.sysError);
+				 result.setMsg("注册失败");
+			 }
+		}
 		return result;
 	}
 	
