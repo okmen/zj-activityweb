@@ -1,27 +1,31 @@
 package com.itservice.web;
 
-import org.apache.commons.lang.ObjectUtils;
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.gson.JsonObject;
-import com.itservice.entity.redistags.RedisUser;
 import com.itservice.result.ResultMsg;
 import com.itservice.result.enums.ResultStatusEnums;
-import com.itservice.vo_param.user.UserRegisterParam;
+import com.itservice.service.IUserService;
+import com.itservice.vo.param.UserRegisterParam;
 import com.utils_max.JsonUtil;
 import com.utils_max.ParseUtils;
-import com.utils_max.encrypt.MD5Encrypt;
-import com.utils_max.redis.RedisUtil;
 
 @Controller
 @RequestMapping(value = "/user/")
 public class UserController {
 
 	/**
+	 * 用户模块 service api 服务
+	 */
+	@Resource(name = "userMgtService")
+	private IUserService loginService;
+	
+	/**
 	 * 用户注册
-	 * @author lvxl
+	 * @author max
 	 * @date:   2018年8月1日
 	 * @Desc :
 	 * @param registerParamJson
@@ -41,17 +45,8 @@ public class UserController {
 				result.setMsg("参数不全");
 				return JsonUtil.objectToJsonStr(result);
 			}
-			UserRegisterParam userJson= (UserRegisterParam)RedisUtil.getObject(RedisUser.user_base+registerParam.getUserName());
-			if(ParseUtils.isEmpty(userJson)){
-				registerParam.setPwd(MD5Encrypt.encrypt(registerParam.getPwd())); 
-				RedisUtil.setObject(RedisUser.user_base+registerParam.getUserName(), registerParam);
-				result.setStatus(ResultStatusEnums.success);
-				result.setBackResult(registerParam);
-				result.setMsg("成功");  
-			}else{
-				result.setStatus(ResultStatusEnums.sysError);
-				result.setMsg("已经存在的用户名"); 
-			}
+			//调取用户注册服务
+			result=loginService.register(registerParam);
 		}else{
 			result.setStatus(ResultStatusEnums.paramError);
 			result.setMsg("参数错误");

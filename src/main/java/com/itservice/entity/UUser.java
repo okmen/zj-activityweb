@@ -3,24 +3,22 @@ package com.itservice.entity;
 import java.util.Date;
 
 public class UUser {
-    private String uid;
+    private Integer uid;
 
     private String username;
 
-    private String mobilephone;
-
     private String pwd;
 
-    private String headimg;
+    private String phone;
 
     private Date createtime;
 
-    public String getUid() {
+    public Integer getUid() {
         return uid;
     }
 
-    public void setUid(String uid) {
-        this.uid = uid == null ? null : uid.trim();
+    public void setUid(Integer uid) {
+        this.uid = uid;
     }
 
     public String getUsername() {
@@ -31,14 +29,6 @@ public class UUser {
         this.username = username == null ? null : username.trim();
     }
 
-    public String getMobilephone() {
-        return mobilephone;
-    }
-
-    public void setMobilephone(String mobilephone) {
-        this.mobilephone = mobilephone == null ? null : mobilephone.trim();
-    }
-
     public String getPwd() {
         return pwd;
     }
@@ -47,12 +37,12 @@ public class UUser {
         this.pwd = pwd == null ? null : pwd.trim();
     }
 
-    public String getHeadimg() {
-        return headimg;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setHeadimg(String headimg) {
-        this.headimg = headimg == null ? null : headimg.trim();
+    public void setPhone(String phone) {
+        this.phone = phone == null ? null : phone.trim();
     }
 
     public Date getCreatetime() {

@@ -1,4 +1,4 @@
-package com.itservice.vo_param.user;
+package com.itservice.vo.param;
 
 import java.io.Serializable;
 

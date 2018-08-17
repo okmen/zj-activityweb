@@ -2,51 +2,51 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.itservice.mapper.UUserMapper" >
   <resultMap id="BaseResultMap" type="com.itservice.entity.UUser" >
-    <id column="Uid" property="uid" jdbcType="VARCHAR" />
+    <id column="UID" property="uid" jdbcType="INTEGER" />
     <result column="UserName" property="username" jdbcType="VARCHAR" />
-    <result column="MobilePhone" property="mobilephone" jdbcType="VARCHAR" />
     <result column="Pwd" property="pwd" jdbcType="VARCHAR" />
-    <result column="HeadImg" property="headimg" jdbcType="VARCHAR" />
+    <result column="Phone" property="phone" jdbcType="VARCHAR" />
     <result column="CreateTime" property="createtime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    Uid, UserName, MobilePhone, Pwd, HeadImg, CreateTime
+    UID, UserName, Pwd, Phone, CreateTime
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from u_user
-    where Uid = #{uid,jdbcType=VARCHAR}
+    where UID = #{uid,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+  <select id="getUserByUsername" resultMap="BaseResultMap"  ><!-- 通过username获取用户信息 -->
+    select 
+    <include refid="Base_Column_List" />
+    from u_user
+    where UserName = #{username,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from u_user
-    where Uid = #{uid,jdbcType=VARCHAR}
+    where UID = #{uid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.itservice.entity.UUser" >
-    insert into u_user (Uid, UserName, MobilePhone, 
-      Pwd, HeadImg, CreateTime
-      )
-    values (#{uid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{mobilephone,jdbcType=VARCHAR}, 
-      #{pwd,jdbcType=VARCHAR}, #{headimg,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}
-      )
+    insert into u_user (UID, UserName, Pwd, 
+      Phone, CreateTime)
+    values (#{uid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{pwd,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.itservice.entity.UUser" >
     insert into u_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="uid != null" >
-        Uid,
+        UID,
       </if>
       <if test="username != null" >
         UserName,
       </if>
-      <if test="mobilephone != null" >
-        MobilePhone,
-      </if>
       <if test="pwd != null" >
         Pwd,
       </if>
-      <if test="headimg != null" >
-        HeadImg,
+      <if test="phone != null" >
+        Phone,
       </if>
       <if test="createtime != null" >
         CreateTime,
@@ -54,19 +54,16 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="uid != null" >
-        #{uid,jdbcType=VARCHAR},
+        #{uid,jdbcType=INTEGER},
       </if>
       <if test="username != null" >
         #{username,jdbcType=VARCHAR},
       </if>
-      <if test="mobilephone != null" >
-        #{mobilephone,jdbcType=VARCHAR},
-      </if>
       <if test="pwd != null" >
         #{pwd,jdbcType=VARCHAR},
       </if>
-      <if test="headimg != null" >
-        #{headimg,jdbcType=VARCHAR},
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
       </if>
       <if test="createtime != null" >
         #{createtime,jdbcType=TIMESTAMP},
@@ -79,28 +76,24 @@
       <if test="username != null" >
         UserName = #{username,jdbcType=VARCHAR},
       </if>
-      <if test="mobilephone != null" >
-        MobilePhone = #{mobilephone,jdbcType=VARCHAR},
-      </if>
       <if test="pwd != null" >
         Pwd = #{pwd,jdbcType=VARCHAR},
       </if>
-      <if test="headimg != null" >
-        HeadImg = #{headimg,jdbcType=VARCHAR},
+      <if test="phone != null" >
+        Phone = #{phone,jdbcType=VARCHAR},
       </if>
       <if test="createtime != null" >
         CreateTime = #{createtime,jdbcType=TIMESTAMP},
       </if>
     </set>
-    where Uid = #{uid,jdbcType=VARCHAR}
+    where UID = #{uid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.itservice.entity.UUser" >
     update u_user
     set UserName = #{username,jdbcType=VARCHAR},
-      MobilePhone = #{mobilephone,jdbcType=VARCHAR},
       Pwd = #{pwd,jdbcType=VARCHAR},
-      HeadImg = #{headimg,jdbcType=VARCHAR},
+      Phone = #{phone,jdbcType=VARCHAR},
       CreateTime = #{createtime,jdbcType=TIMESTAMP}
-    where Uid = #{uid,jdbcType=VARCHAR}
+    where UID = #{uid,jdbcType=INTEGER}
   </update>
 </mapper>
