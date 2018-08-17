@@ -1,5 +1,11 @@
 package com.itservice.result.enums;
 
+/**
+ * 通用结果enum
+ * @author max
+ * @date:   2018年8月17日
+ * @Desc :
+ */
 public enum ResultStatusEnums {
 	/**
 	 * 成功
